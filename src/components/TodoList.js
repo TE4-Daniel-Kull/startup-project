@@ -1,6 +1,5 @@
 import React from 'react';
 import TodoItem from './TodoItem';
-import MockupData from '../MockupData.js'
 
 /*function TodoList() {
     let todoItems = MockupData.todoItems;
@@ -17,9 +16,9 @@ class TodoList extends React.Component {
 
     constructor() {
         super();
-
+        
         this.state = {
-            todoItems: MockupData.todoItems,
+            todoItems: [],
             isLoading: true,
             loadingMessage: "Loading all your shit",
             dynamicLoadingMessage: "",
@@ -53,6 +52,10 @@ class TodoList extends React.Component {
         }, 2000);
 
         this.loadingDots();
+
+        this.setState({
+            todoItems: this.props.todoItems
+        });
     }
 
     loadingDots() {

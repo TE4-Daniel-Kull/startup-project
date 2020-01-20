@@ -7,11 +7,17 @@ class TodoForm extends React.Component {
         this.state = {
             isChecked: false,
             todoText: "",
-            todoItems: this.props.todoItems
+            todoItems: []
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            todoItems: this.props.todoItems
+        });
     }
 
     handleChange(event) {
@@ -27,7 +33,17 @@ class TodoForm extends React.Component {
     submitForm(event) {
         event.preventDefault();
 
-        console.log(this.state);
+        this.setState(prevState => {
+            let updatedTodos = [...prevState.todoItems];
+            console.log("updatedTodos", updatedTodos);
+            updatedTodos.push({
+                id: prevState.todoItems.length,
+                done: prevState.isChecked, 
+                description: prevState.todoText
+            });
+
+            return {todoItems: updatedTodos};
+        });
     }
 
     render() {
