@@ -1,3 +1,6 @@
 1. Create a page with a face on it. https://www.fillmurray.com/200/100"
 2. Have an onPointerEnter call a function and display the message "Get out of my face"!
 3. Do random chores for the old man. 
+
+fun stuff:
+starwars api: "https://swapi.co/api/people/1"
