@@ -50,23 +50,21 @@ class TodoForm extends React.Component {
         return (
             <div>
                 <h2>Create new todo:</h2>
-                <form>
+                <form onSubmit={this.submitForm}>
                     <input 
                         name="isChecked"
                         type="checkbox"  
+                        value={this.state.isChecked}
                         onChange={this.handleChange}
                     />
                     <input 
                         name="todoText"
                         type="text"
+                        value={this.state.todosText}
                         onChange={this.handleChange}
                     >
                     </input>
-                    <button 
-                        onClick={this.submitForm}
-                    >
-                        Create todo
-                    </button>
+                    <button>Create todo</button>
                 </form>
                 <p>checked: {this.state.isChecked.toString()}</p>
                 <p>todoText: {this.state.todoText.toString()}</p>
