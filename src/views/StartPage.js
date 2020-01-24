@@ -3,7 +3,8 @@ import TodoList from '../components/TodoList';
 import TodoForm from '../components/TodoForm';
 import FunctionalStateComponent from '../components/FunctionalStateComponent';
 import MockupData from '../MockupData.js';
-import ReduxStateComponent from '../components/ReduxStateComponent';
+import ReduxStateConnectExample from '../components/ReduxStateConnectExample';
+import ReduxStateHooksExample from '../components/ReduxStateHooksExample';
 
 class StartPage extends React.Component {
 
@@ -20,7 +21,8 @@ class StartPage extends React.Component {
                 <TodoList todoItems={this.state.todoItems}/>
                 <TodoForm todoItems={this.state.todoItems}/>
                 <FunctionalStateComponent />
-                <ReduxStateComponent />
+                <ReduxStateConnectExample />
+                <ReduxStateHooksExample />
             </div>
         );
     }

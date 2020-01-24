@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {increment, decrement} from '../redux/count';
 
-function ReduxStateComponent(props) {
+function ReduxStateConnectExample(props) {
     return (
         <div>
-            <h1>Counter: {props.count}</h1>
+            <h1>Counter(using connect): {props.count}</h1>
             <button onClick={() => {props.decrement()}}>-</button>
             <button onClick={() => {props.increment()}}>+</button>
         </div>
@@ -26,4 +26,4 @@ const mapDispatchToProps = {
 }
 
 // connect: connects the global state variables to the properties of the given component.
-export default connect(mapStateToProps, mapDispatchToProps)(ReduxStateComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ReduxStateConnectExample);
