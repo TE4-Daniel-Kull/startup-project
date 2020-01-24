@@ -6,8 +6,8 @@ function ReduxStateComponent(props) {
     return (
         <div>
             <h1>Counter: {props.count}</h1>
-            <button onClick={props.increment}>-</button>
-            <button onClick={props.decrement}>+</button>
+            <button onClick={() => {props.decrement()}}>-</button>
+            <button onClick={() => {props.increment()}}>+</button>
         </div>
     );
 }
