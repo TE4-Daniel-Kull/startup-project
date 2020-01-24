@@ -1,7 +1,7 @@
-import Redux from 'redux';
-import favoriteThingsReducer from './redux/favoriteThings';
-import moodReducer from './redux/mood';
-import countReducer from './redux/count';
+import favoriteThingsReducer from './favoriteThings';
+import moodReducer from './mood';
+import countReducer from './count';
+const Redux = require('redux');
 
 const rootReducer = Redux.combineReducers({
     favoriteThings: favoriteThingsReducer,

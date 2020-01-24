@@ -5,9 +5,16 @@ export function setCount(newCount) {
     }
 }
 
-export function addCount(value) {
+export function increment(value = 1) {
     return {
-        type: "ADD_COUNT",
+        type: "INCREMENT",
+        payload: value
+    }
+}
+
+export function decrement(value = 1) {
+    return {
+        type: "DECREMENT",
         payload: value
     }
 }
@@ -17,8 +24,11 @@ export default function countReducer(count = 0, action) {
         case "SET_COUNT": {
             return action.payload;
         }
-        case "ADD_COUNT": {
+        case "INCREMENT": {
             return count + action.payload;
+        }
+        case "DECREMENT": {
+            return count - action.payload;
         }
         default: {
             return count;

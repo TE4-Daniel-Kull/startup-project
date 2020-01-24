@@ -3,6 +3,7 @@ import TodoList from '../components/TodoList';
 import TodoForm from '../components/TodoForm';
 import FunctionalStateComponent from '../components/FunctionalStateComponent';
 import MockupData from '../MockupData.js';
+import ReduxStateComponent from '../components/ReduxStateComponent';
 
 class StartPage extends React.Component {
 
@@ -19,6 +20,7 @@ class StartPage extends React.Component {
                 <TodoList todoItems={this.state.todoItems}/>
                 <TodoForm todoItems={this.state.todoItems}/>
                 <FunctionalStateComponent />
+                <ReduxStateComponent />
             </div>
         );
     }
