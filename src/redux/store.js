@@ -2,16 +2,17 @@ import favoriteThingsReducer from './favoriteThings';
 import moodReducer from './mood';
 import countReducer from './count';
 import todoReducer from './todo';
-const Redux = require('redux');
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 
-const rootReducer = Redux.combineReducers({
+const rootReducer = combineReducers({
     favoriteThings: favoriteThingsReducer,
     mood: moodReducer,
     count: countReducer,
     todo: todoReducer
 });
 
-const store = Redux.createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 export default store;
 
 /* 
@@ -44,11 +45,24 @@ export default store;
     * Create const mapDispatchToProps function.
     * Add connect function to export.
     * Change onClick function call if needed. (props. => this.)
-- 4 LOAD MOCKUP DATA INTO TodoList USING redux/todo.js
-    - import thunk so we can do asyncronous tasks.
-    - Create an asyncronous action to fetchTodos in redux/todo.
-        - Make a mockup fetch request to a random api.
-        - .Then(), pass mockupdata from MockupData.todoItems as payload.
-    - Create reducer case for "OVERRITE_TODO_LIST".
-        - Return the action.payload.
+
+* 4 SETUP REDUX-THUNK
+    * import thunk from 'redux-thunk' in store.js.
+    * import applyMiddleware from 
+    * when creating store, pass in 'applyMiddleware(thunk)' as the second parameter.
+* 5 LOAD MOCKUP DATA INTO TodoList USING redux/todo.js
+    * complete #4.
+    * Create an asyncronous action to fetchTodos in redux/todo.
+        * return a function that takes the functions dispatch and getState as parameters.
+            * Inside the funciton, make a mockup fetch request to a random api.
+            * .Then(), pass mockupdata from MockupData.todoItems as payload.
+            * Use the dispatch function with the normal action return syntax.
+    * Create reducer case for "OVERRITE_TODO_LIST".
+        * Return the action.payload.
+* 6 MODIFY TodoList TO CALL ACTION fetchTodoList
+    * import fetchTodoList from redux/todo.
+    * pass it in using the mapDispatchToProps.
+    * If the todoList is initially empty
+        * call props.fetchTodoList.
+    * Map over the todoList in our redux state and generate the TodoItem components.
 */

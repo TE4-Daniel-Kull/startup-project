@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+
 import TodoItem from './TodoItem';
+import {fetchTodoList, addTodo} from '../redux/todo';
 
 /*function TodoList() {
     let todoItems = MockupData.todoItems;
@@ -15,14 +17,16 @@ import TodoItem from './TodoItem';
 
 class TodoList extends React.Component {
 
-    constructor() {
-        super();
-        
-        this.state = {
-            isLoading: false,
-            loadingMessage: "Loading all your shit",
-            dynamicLoadingMessage: "",
-            loadingCount: 0
+    state = {
+        isLoading: false,
+        loadingMessage: "Loading all your shit",
+        dynamicLoadingMessage: "",
+        loadingCount: 0
+    }
+
+    componentDidMount() {
+        if(!this.props.todoList || this.props.todoList.length === 0) {
+            this.props.fetchTodoList();
         }
     }
 
@@ -59,4 +63,9 @@ function mapStateToProps(globalState) {
     };
 }
 
-export default connect(mapStateToProps, {})(TodoList);
+const mapDispatchToProps = {
+    fetchTodoList: fetchTodoList,
+    addTodo: addTodo
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

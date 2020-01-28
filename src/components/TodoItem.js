@@ -13,7 +13,7 @@ function TodoItem(props) {
                     type="checkbox" 
                     name="done" 
                     checked={todoItem.done}
-                    onChange={() => { this.props.toggleTodoDone(todoItem.id)}}
+                    onChange={() => { props.toggleTodoDone(todoItem.id)}}
                 />
                 <span>{todoItem.description}</span>
             </li>
@@ -24,4 +24,4 @@ const mapDispatchToProps = {
     toggleTodoDone: toggleTodoDone
 }
 
-export default connect(() => {}, mapDispatchToProps)(TodoItem);
+export default connect(null, mapDispatchToProps)(TodoItem);
