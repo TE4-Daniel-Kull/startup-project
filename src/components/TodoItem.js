@@ -1,4 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
+import { toggleTodoDone } from '../redux/todo';
 
 function TodoItem(props) {
     let todoItem = props.todoItem;
@@ -10,11 +13,15 @@ function TodoItem(props) {
                     type="checkbox" 
                     name="done" 
                     checked={todoItem.done}
-                    onChange={() => { props.handleChange(todoItem.id)}}
+                    onChange={() => { this.props.toggleTodoDone(todoItem.id)}}
                 />
                 <span>{todoItem.description}</span>
             </li>
     );
 }
 
-export default TodoItem;
+const mapDispatchToProps = {
+    toggleTodoDone: toggleTodoDone
+}
+
+export default connect(() => {}, mapDispatchToProps)(TodoItem);

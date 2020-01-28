@@ -1,15 +1,23 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './style/App.sass';
-import BasicHeader from './components/BasicHeader';
-import BasicFooter from './components/BasicFooter';
-import StartPage from './views/StartPage';
+
+import isDev from './CheckIfDev.ts';
+import DevPage from './views/DevPage';
+import HomePage from './views/HomePage';
+import AppBar from './components/AppBar';
 
 function App() {
     return (
         <div>
-            <BasicHeader />
-            <StartPage />
-            <BasicFooter />
+            <Router>
+                <AppBar />
+                <Switch>
+                    <Route path="/home" component={HomePage} />
+                    {isDev() && <Route exact path="/dev" component={DevPage} /> }
+                </Switch>
+            </Router>
+
         </div>
     );
 }

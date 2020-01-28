@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import TodoItem from './TodoItem';
 
 /*function TodoList() {
@@ -18,61 +19,32 @@ class TodoList extends React.Component {
         super();
         
         this.state = {
-            todoItems: [],
-            isLoading: true,
+            isLoading: false,
             loadingMessage: "Loading all your shit",
             dynamicLoadingMessage: "",
             loadingCount: 0
         }
-        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(id) {
-        this.setState((prevState) => {
-            let updatedTodoItems = prevState.todoItems.map((todo) => {
-                if(todo.id === id) {
-                    return {
-                        ...todo,
-                        done: !todo.done
-                    };
-                }
+    // componentDidMount() {
+    //     this.loadingDots();
+    // }
 
-                return todo;
-            });
+    // loadingDots() {
+    //     if(!this.state.isLoading) return;
 
-            return {todoItems: updatedTodoItems};
-        });
-    }
+    //     setTimeout(() => {
+    //         this.setState((prevState) => {
+    //             let dots = ".".repeat(prevState.loadingCount);
 
-    componentDidMount() { // Faking api loadtime
-        setTimeout(() => {
-            this.setState(() => {
-                return {isLoading: false};
-            });
-        }, 2000);
-
-        this.loadingDots();
-
-        this.setState({
-            todoItems: this.props.todoItems
-        });
-    }
-
-    loadingDots() {
-        if(!this.state.isLoading) return;
-
-        setTimeout(() => {
-            this.setState((prevState) => {
-                let dots = ".".repeat(prevState.loadingCount);
-
-                return {dynamicLoadingMessage: prevState.loadingMessage + dots, loadingCount: (prevState.loadingCount + 1) % 5 }
-            });
-            this.loadingDots();
-        }, 250);
-    }
+    //             return {dynamicLoadingMessage: prevState.loadingMessage + dots, loadingCount: (prevState.loadingCount + 1) % 5 }
+    //         });
+    //         this.loadingDots();
+    //     }, 250);
+    // }
     
     render() {
-        let todoComponents = this.state.todoItems.map(todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} handleChange={this.handleChange} />)
+        let todoComponents = this.props.todoList.map(todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} />)
         return (
             <ul className="todo-list">
                 {this.state.isLoading ? <p>{this.state.dynamicLoadingMessage}</p> : todoComponents}
@@ -81,4 +53,10 @@ class TodoList extends React.Component {
     }
 }
 
-export default TodoList;
+function mapStateToProps(globalState) {
+    return {
+        todoList: globalState.todo
+    };
+}
+
+export default connect(mapStateToProps, {})(TodoList);
