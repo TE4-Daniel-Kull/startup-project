@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import { toggleTodoDone } from '../redux/todo';
+import { toggleTodoDone, removeTodo } from '../redux/todo';
 
 function TodoItem(props) {
     let todoItem = props.todoItem;
@@ -16,12 +16,22 @@ function TodoItem(props) {
                     onChange={() => { props.toggleTodoDone(todoItem.id)}}
                 />
                 <span>{todoItem.description}</span>
+                <button onClick={() => { props.removeTodo(todoItem); }}>x</button>
             </li>
     );
 }
 
 const mapDispatchToProps = {
-    toggleTodoDone: toggleTodoDone
+    toggleTodoDone: toggleTodoDone,
+    removeTodo: removeTodo
 }
 
 export default connect(null, mapDispatchToProps)(TodoItem);
+
+/*
+- 1 LET USER REMOVE TODO
+    * import removeTodo from redux/todo.
+    * add removeTodo into mapDispatchToProps.
+    * Add a jsx button after the description.
+    * Add an onClick event that calls the dispath for removeTodo passing in the todoItem.
+*/

@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import {connect} from 'react-redux';
+import {addTodo} from '../redux/todo';
 
 class TodoForm extends React.Component {
     constructor() {
@@ -14,12 +16,6 @@ class TodoForm extends React.Component {
         this.submitForm = this.submitForm.bind(this);
     }
 
-    componentDidMount() {
-        this.setState({
-            todoItems: this.props.todoItems
-        });
-    }
-
     handleChange(event) {
         let target = event.target;
         let name = target.name;
@@ -33,17 +29,11 @@ class TodoForm extends React.Component {
     submitForm(event) {
         event.preventDefault();
 
-        this.setState(prevState => {
-            let updatedTodos = [...prevState.todoItems];
-            console.log("updatedTodos", updatedTodos);
-            updatedTodos.push({
-                id: prevState.todoItems.length,
-                done: prevState.isChecked, 
-                description: prevState.todoText
-            });
-
-            return {todoItems: updatedTodos};
-        });
+        let newTodo = {
+            done: this.state.isChecked, 
+            description: this.state.todoText
+        }
+        this.props.addTodo(newTodo);
     }
 
     render() {
@@ -73,4 +63,18 @@ class TodoForm extends React.Component {
     }
 }
 
-export default TodoForm;
+const mapDispatchToProps = {
+    addTodo: addTodo
+}
+
+export default connect(null, mapDispatchToProps)(TodoForm);
+
+
+/*
+* 1 RE-DESIGN TodoForm TO USE REDUX
+    * import addTodo from redux/todo.
+    * create const mapDispatchToProps containing the addTodo.
+    * add connect(null, mapDispatchToProps) to export.
+    * Change submitForm function to use addTodo instead of appending to local todoList.
+    * import connect from react-redux.
+*/
