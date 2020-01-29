@@ -16,7 +16,10 @@ function TodoItem(props) {
                     onChange={() => { props.toggleTodoDone(todoItem.id)}}
                 />
                 <span>{todoItem.description}</span>
-                <button onClick={() => { props.removeTodo(todoItem); }}>x</button>
+                <button 
+                    className="todo-list__item__button"
+                    onClick={() => { props.removeTodo(todoItem); }}
+                >X</button>
             </li>
     );
 }
@@ -29,7 +32,7 @@ const mapDispatchToProps = {
 export default connect(null, mapDispatchToProps)(TodoItem);
 
 /*
-- 1 LET USER REMOVE TODO
+* 1 LET USER REMOVE TODO
     * import removeTodo from redux/todo.
     * add removeTodo into mapDispatchToProps.
     * Add a jsx button after the description.
